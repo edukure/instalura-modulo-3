@@ -1,10 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { ThemeProvider } from 'styled-components';
-
-import theme from '../src/theme';
-import GlobalStyle from '../src/theme/GlobalStyle';
-import SEO from '../src/components/commons/SEO';
 
 // eslint-disable-next-line react/prop-types
 export default function App({ Component, pageProps }) {
@@ -19,13 +14,8 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
 
-      <SEO headTitle="Home" />
-
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Component {...pageProps} />
-      </ThemeProvider>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <Component {...pageProps} />
     </>
   );
 }

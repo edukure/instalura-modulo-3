@@ -1,46 +1,16 @@
 import React from 'react';
 import Button from '../src/components/commons/Button';
-import Footer from '../src/components/commons/Footer';
-import Menu from '../src/components/commons/Menu';
-import Modal from '../src/components/commons/Modal';
 import Box from '../src/components/foundation/layout/Box';
 import Grid from '../src/components/foundation/layout/Grid';
 import Text from '../src/components/foundation/Text';
-import FormCadastro from '../src/components/patterns/FormCadastro';
+import { WebsitePageContext } from '../src/components/wrappers/WebsitePage';
+import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
-export default function Home() {
-  const [isModalOpen, setModalState] = React.useState(false);
+const HomeScreen = () => {
+  const websitePageContext = React.useContext(WebsitePageContext);
 
   return (
-    <Box
-      flex={1}
-      display="flex"
-      flexWrap="wrap"
-      flexDirection="column"
-      justifyContent="space-between"
-      backgroundImage="url(/images/bubbles.svg)"
-      backgroundRepeat="no-repeat"
-      backgroundPosition="bottom right"
-    >
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setModalState(false);
-        }}
-      >
-        {(propsDoModal) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          // <Box backgroundColor="white" {...propsDoModal}>
-          //   <div>Nosso conteúdo pro modal</div>
-          // </Box>
-
-          <FormCadastro propsDoModal={propsDoModal} />
-        )}
-      </Modal>
-
-      <Menu
-        onCadastrarClick={() => setModalState(true)}
-      />
+    <Box display="flex" flex="1" flexDirection="column">
 
       <Grid.Container
         marginTop={{
@@ -62,7 +32,7 @@ export default function Home() {
             <Text
               variant="title"
               tag="h1"
-              // textAlign={'center'}
+            // textAlign={'center'}
               textAlign={{
                 xs: 'center',
                 md: 'left',
@@ -91,7 +61,7 @@ export default function Home() {
               }}
               display="block"
               onClick={() => {
-                setModalState(!isModalOpen);
+                websitePageContext.toggleModalCadastro();
               }}
             >
               Cadastrar
@@ -107,8 +77,30 @@ export default function Home() {
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
-
-      <Footer />
     </Box>
   );
-}
+};
+
+export default websitePageHOC(HomeScreen, {
+  seoProps: { headTitle: 'Home' },
+  pageBoxProps: {
+    backgroundImage: 'url(/images/bubbles.svg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom right',
+  },
+});
+
+// export default function Home() {
+//   return (
+//     <WebsitePageWrapper
+//       seoProps={{ headTitle: 'Home' }}
+//       pageBoxProps={{
+//         backgroundImage: 'url(/images/bubbles.svg)',
+//         backgroundRepeat: 'no-repeat',
+//         backgroundPosition: 'bottom right',
+//       }}
+//     >
+//       <HomeScreen />
+//     </WebsitePageWrapper>
+//   );
+// }
