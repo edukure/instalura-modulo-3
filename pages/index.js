@@ -28,14 +28,13 @@ export default function Home() {
           setModalState(false);
         }}
       >
-        {(propsDoModal) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
+
+        {/* // eslint-disable-next-line react/jsx-props-no-spreading
           // <Box backgroundColor="white" {...propsDoModal}>
           //   <div>Nosso conteúdo pro modal</div>
-          // </Box>
+          // </Box> */}
 
-          <FormCadastro propsDoModal={propsDoModal} />
-        )}
+        <FormCadastro />
       </Modal>
 
       <Menu />

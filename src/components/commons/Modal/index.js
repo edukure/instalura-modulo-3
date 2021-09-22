@@ -67,8 +67,14 @@ function Modal({ isOpen, onClose, children }) {
         }}
         style={{ display: 'flex', flex: 1 }}
       >
-        {children({
+        {/* {children({
           'data-modal-safe-area': 'true',
+        })}
+         */}
+        {React.cloneElement(children, {
+          propsDoModal: {
+            'data-modal-safe-area': true,
+          },
         })}
       </motion.div>
     </ModalWrapper>
